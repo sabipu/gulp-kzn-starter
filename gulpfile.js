@@ -50,7 +50,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('js', () => {
-  return gulp.src([ src_assets_folder + 'js/**/*.js' ], { since: gulp.lastRun('js') })
+  return gulp.src([ src_assets_folder + 'js/*.js' ], { since: gulp.lastRun('js') })
     .pipe(plumber())
     .pipe(webpack({
       mode: 'production'
