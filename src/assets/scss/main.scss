@@ -387,7 +387,6 @@ p {
     padding-top: 220px;
     padding-bottom: 141px;
     background-image: url('../images/wave-pattern.png'), radial-gradient(33.33% 46.81% at 44.95% 44.6%, rgba(0, 0, 0, 0.8) 16.44%, #020202 100%);
-    // background-image: url('../images/wave-pattern.png');
 }
 
 .contentbox__text {
@@ -451,11 +450,18 @@ p {
 }
 
 .contactblock {
-    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    background: #fff;
 
     h2 {
         margin-bottom: 86px;
     }
+}
+
+.contactblock__wrapper {
+    padding-top: 100px 0;
+    background-image: url('../images/wave-pattern.png'), radial-gradient(33.33% 46.81% at 44.95% 44.6%, rgba(0, 0, 0, 0.8) 16.44%, #020202 100%);
 }
 
 .form__wrapper {
