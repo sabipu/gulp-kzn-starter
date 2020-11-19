@@ -60,36 +60,22 @@ $half-gutter-width: $flexboxgrid-gutter-width * .5;
 .container {
   padding-left: 25px;
   padding-right: 25px;
-  max-width: 1300px;
-  margin: 0 auto;
-
-  @include breakpoint('small') {
-    padding-left: $flexboxgrid-outer-margin;
-    padding-right: $flexboxgrid-outer-margin;
-  }
-
-  @include breakpoint('xxlarge') {
-    max-width: $flexboxgrid-max-width;
-  }
-
-  &.container__big {
-    max-width: 1550px;
-
-    @include breakpoint('xxlarge') {
-      max-width: $flexboxgrid-large-max-width;
-    }
-  }
-
-  &.container__small {
-    @include breakpoint('xxlarge') {
-      max-width: $flexboxgrid-small-max-width;
-    }
-  }
+  max-width: 1620px;
+  margin-left: auto;
+  margin-right: auto;
 
   &:after {
     content: '';
     display: block;
     clear: both;
+  }
+
+  &.container--small {
+    max-width: 1085px;
+  }
+
+  &.container--medium {
+    max-width: 1285px;
   }
 }
 

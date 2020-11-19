@@ -96,9 +96,9 @@ gulp.task('fonts', () => {
             .pipe(gulp.dest(dist_assets_folder + 'fonts/'));
 });
 
-gulp.task('build', gulp.series('clear', 'html', 'sass', 'js', 'images', 'vendor', 'fonts'));
+gulp.task('build', gulp.series('clear', 'html', 'sass', 'images', 'vendor', 'fonts'));
 
-gulp.task('dev', gulp.series('html', 'sass', 'js', 'fonts'));
+gulp.task('dev', gulp.series('html', 'sass', 'fonts'));
 
 gulp.task('serve', () => {
   return browserSync.init({
@@ -125,7 +125,6 @@ gulp.task('watch', () => {
     src_folder + '**/*.html',
     src_assets_folder + 'sass/**/*.sass',
     src_assets_folder + 'scss/**/*.scss',
-    src_assets_folder + 'js/**/*.js',
     src_assets_folder + 'fonts/**/*.*'
   ];
 

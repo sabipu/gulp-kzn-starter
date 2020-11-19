@@ -11,7 +11,15 @@ animateIn:!1},e.prototype.swap=function(){if(1===this.core.settings.items&&a.sup
 
 
 $(document).ready(function() {
-    $('.banner__slider').owlCarousel({
-        loop:true
-    })
+    $('.owl-carousel').owlCarousel({
+        items: 1,
+        dots: true,
+        nav: false
+    });
+
+    $('.bg__image').each(function() {
+      var $el = $(this);
+      var image = $el.find("img").attr("src");
+      $el.css("background-image", "url(" + image + ")");
+    });
 })

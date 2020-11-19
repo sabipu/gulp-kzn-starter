@@ -1,4 +1,5 @@
 @import "vendors/flexboxgrid";
+@import "vendors/_owlcarousel";
 
 $bodybg: #000; 
 
@@ -141,14 +142,20 @@ a {
 
 h1,h2,h3,h4,h5,h6 {
     margin: 0 0 25px;
+    line-height: 1.2;
+    color: #fff;
 }
 
 h2 {
-    font-size: 44px;
+    font-size: 56px;
+}
+
+h3 {
+    font-size: 28px;
 }
 
 p {
-    margin-bottom: 20px;
+    margin: 0 0 20px;
 }
 
 .bg__image {
@@ -171,7 +178,6 @@ p {
   overflow: hidden;
   width: 100%;
   position: relative;
-  padding-top: 142px;
 }
 
 .header {
@@ -179,17 +185,18 @@ p {
     left: 0;
     right: 0;
     top: 0;
-    padding: 35px 0;
+    padding: 40px 0;
+    z-index: 6;
 }
 
 .logo {
-    width: 145px;
+    width: 130px;
     float: left;
 }
 
 .navigation {
     float: right;
-    padding: 24px 0 0;
+    padding: 7px 0 0;
 }
 
 .mainnav {
@@ -201,11 +208,11 @@ p {
     li {
         display: inline-block;
         vertical-align: middle;
-        margin-left: 15px;
+        margin-left: 48px;
 
         &:last-child {
             a {
-                padding: 4px 25px;
+                padding: 4px 38px;
                 border-radius: 6px;
                 position: relative;
                 z-index: 2;
@@ -241,6 +248,7 @@ p {
     vertical-align: top;
     padding: 10px 20px;
     min-width: 200px;
+    font-weight: 500;
     text-align: center;
     border-radius: 6px;
     position: relative;
@@ -249,6 +257,7 @@ p {
     text-decoration: none;
     border: none;
     cursor: pointer;
+    outline: none !important;
     background: linear-gradient(to right, #F16122, #FEBD33);
 
     &:before {
@@ -265,16 +274,87 @@ p {
 }
 
 .banner {
-    padding: 100px 0;
+
+    h2 {
+        font-size: 78px;
+        margin-bottom: 40px;
+    }
+
+    p {
+        margin-bottom: 33px;
+    }
+}
+
+.banner__slider {
+    .bg__image {
+        left: 50%;
+    }
+
+    .slide {
+        padding: 215px 0 312px;
+        overflow: hidden;
+        position: relative;
+
+        &:before {
+            content: '';
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            z-index: 1;
+            background: #000;
+            background: radial-gradient(62.08% 58.66% at 100% 55.09%, rgba(0, 0, 0, 0.31) 0%, #000000 78.23%);
+        }
+    }
+
+    .container {
+        position: relative;
+        z-index: 3;
+    }
+}
+
+.owl-dots {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 95px;
+
+    button {
+        display: inline-block;
+        vertical-align: top;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        background: #F16122;
+        opacity: 0.5;
+        cursor: pointer;
+        user-select: none;
+        border: none;
+        margin: 0 8px;
+        transition: opacity 0.3s;
+        outline: none !important;
+        border: none !important;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.active {
+            opacity: 1;
+        }
+    }
 }
 
 .banner__text {
-    max-width: 720px;
+    max-width: 670px;
+    min-height: 500px;
 }
 
 .awslogo {
-    width: 150px;
-    margin-bottom: 15px;
+    width: 174px;
+    margin-bottom: 38px;
 }
 
 .descriptionboxes {
@@ -282,18 +362,32 @@ p {
 
     h2 {
         text-align: center;
+        margin-bottom: 119px;
     }
 }
 
 .articlebox {
     text-align: center;
-    padding: 20px 30px;
+    padding: 65px 25px;
+    color: rgba(255,255,255,0.7);
     background: linear-gradient(180deg, #171717 0%, rgba(23, 23, 23, 0) 100%);
+
+    .image {
+        margin-bottom: 33px;
+    }
 }
 
 .contentbox {
-    padding: 40px 0;
     text-align: center;
+    position: relative;
+    background: #fff;
+}
+
+.contentbox__wrappper {
+    padding-top: 220px;
+    padding-bottom: 141px;
+    background-image: url('../images/wave-pattern.png'), radial-gradient(33.33% 46.81% at 44.95% 44.6%, rgba(0, 0, 0, 0.8) 16.44%, #020202 100%);
+    // background-image: url('../images/wave-pattern.png');
 }
 
 .contentbox__text {
@@ -301,46 +395,67 @@ p {
     margin: 0 auto;
 }
 
+.contentbox__btn {
+    padding-top: 21px;
+}
+
 .missionblock {
-    padding: 40px 0;
+    padding: 70px 0;
 
     h2 {
         text-align: center;
+        margin-bottom: 132px;
+    }
+
+    .text {
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 700;
     }
 }
 
 .textbox {
     text-align: center;
+    padding: 0 20px;
 
     .image {
-        margin-bottom: 15px;
+        margin-bottom: 37px;
+        height: 70px;
     }
 }
 
 .ourclients {
-    padding: 40px 0;
+    padding: 190px 0 57px;
     text-align: center;
+
+    h2 {
+        margin-bottom: 126px;
+    }
 }
 
 .logo__list {
     list-style: none;
-    margin: 0;
+    margin: 0 -60px 25px;
     padding: 0;
 
     li {
         display: inline-block;
         vertical-align: middle;
-        margin: 0 30px;
+        margin: 0 60px 20px;
     }
 }
 
 .button__wrapper {
-    padding: 30px 0;
+    padding: 60px 0;
     text-align: center;
 }
 
 .contactblock {
-    padding: 40px 0;
+    padding: 100px 0;
+
+    h2 {
+        margin-bottom: 86px;
+    }
 }
 
 .form__wrapper {
@@ -351,7 +466,7 @@ p {
 
 .form-title {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 
@@ -381,11 +496,24 @@ textarea.form__control {
 }
 
 .submit__wrapper {
-    padding: 20px 0;
+    padding: 30px 0;
 }
 
 .footer {
-    padding: 40px 0;
+    padding: 40px 0 80px;
+}
+
+.footer__text {
+    display: block;
+    color: rgba(255,255,255,.5);
+}
+
+.footer__title {
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+    display: block;
+    margin-bottom: 20px;
 }
 
 .footer__column {
