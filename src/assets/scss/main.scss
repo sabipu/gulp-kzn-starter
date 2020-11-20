@@ -123,11 +123,19 @@ textarea {
   font: inherit;
 }
 
+.same--height {
+    [class^="col-"],
+    [class*=" col-"] {
+        flex: 0 0 1;
+    }
+}
+
 body {
   margin: 0;
   font: 300 20px/1.5 'Klavika', Arial, Helvetica, sans-serif;
   background: $bodybg;
   color: #fff;
+  min-width: 360px;
 }
 
 img {
@@ -158,6 +166,45 @@ p {
     margin: 0 0 20px;
 }
 
+.button__opener {
+    display: block;
+    width: 32px;
+    height: 26px;
+    position: relative;
+    background: transparent;
+    border: none;
+    outline: none !important;
+
+    @include breakpoint('small') {
+        display: none;
+    }
+
+    &:before,
+    &:after,
+    span {
+        position: absolute;
+        left: 5px;
+        right: 0;
+        top: 50%;
+        height: 2px;
+        margin-top: -1px;
+        background: #fff;
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        margin: 0;
+        top: 0;
+        left: 0;
+    }
+
+    &:before {
+        top: auto;
+        bottom: 0;
+    }
+}
+
 .bg__image {
     position: absolute;
     left: 0;
@@ -185,13 +232,21 @@ p {
     left: 0;
     right: 0;
     top: 0;
-    padding: 40px 0;
+    padding: 20px 0;
     z-index: 6;
+
+    @include breakpoint('small') {
+        padding: 40px 0;
+    }
 }
 
 .logo {
-    width: 130px;
+    width: 95px;
     float: left;
+
+    @include breakpoint('small') {
+        width: 130px;
+    }
 }
 
 .navigation {
@@ -204,6 +259,15 @@ p {
     margin: 0;
     padding: 0;
     font-weight: 500;
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: none;
+
+    @include breakpoint('small') {
+        display: block;
+        position: static;
+    }
 
     li {
         display: inline-block;
@@ -274,10 +338,14 @@ p {
 }
 
 .banner {
-
-    h2 {
-        font-size: 78px;
+    h2,
+    h1 {
+        font-size: 45px;
         margin-bottom: 40px;
+
+        @include breakpoint('small') {
+            font-size: 78px;
+        }
     }
 
     p {
@@ -291,9 +359,13 @@ p {
     }
 
     .slide {
-        padding: 215px 0 312px;
+        padding: 145px 0 312px;
         overflow: hidden;
         position: relative;
+
+        @include breakpoint('small') {
+            padding: 215px 0 112px;
+        }
 
         &:before {
             content: '';
@@ -311,6 +383,34 @@ p {
     .container {
         position: relative;
         z-index: 3;
+    }
+}
+
+.arrow__holder {
+    height: 100px;
+    width: 20px;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        margin-left: -1px;
+        width: 2px;
+        top: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, #000, #F16122);
+    }
+
+    .icon {
+        position: absolute;
+        vertical-align: top;
+        left: 0;
+        bottom: -10px;
+        width: 20px;
+        height: 20px;
+        z-index: 2;
+        fill: #F16122;
     }
 }
 
@@ -353,8 +453,12 @@ p {
 }
 
 .awslogo {
-    width: 174px;
+    width: 130px;
     margin-bottom: 38px;
+
+    @include breakpoint('small') {
+        width: 174px;
+    }
 }
 
 .descriptionboxes {
@@ -384,8 +488,7 @@ p {
 }
 
 .contentbox__wrappper {
-    padding-top: 220px;
-    padding-bottom: 141px;
+    padding: 120px 0;
     background-image: url('../images/wave-pattern.png'), radial-gradient(33.33% 46.81% at 44.95% 44.6%, rgba(0, 0, 0, 0.8) 16.44%, #020202 100%);
 }
 
@@ -460,7 +563,7 @@ p {
 }
 
 .contactblock__wrapper {
-    padding-top: 100px 0;
+    padding: 120px 0;
     background-image: url('../images/wave-pattern.png'), radial-gradient(33.33% 46.81% at 44.95% 44.6%, rgba(0, 0, 0, 0.8) 16.44%, #020202 100%);
 }
 
@@ -563,5 +666,81 @@ textarea.form__control {
         display: inline-block;
         vertical-align: middle;
         margin-right: 10px;
+    }
+}
+
+.inner__banner {
+    position: relative;
+    padding: 250px 0 150px;
+
+    &:before {
+        content: '';
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        z-index: 1;
+        background: #000;
+        background: radial-gradient(62.08% 58.66% at 100% 55.09%, rgba(0, 0, 0, 0.31) 0%, #000000 78.23%);
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+.serviceboxes {
+    .column {
+        background: linear-gradient(129.86deg, #171717 57.41%, rgba(2, 2, 2, 0) 97.63%);
+    }
+}
+
+.service__textbox {
+    padding: 2vw 3vw;
+}
+
+.contentcolumns {
+    padding: 100px 0;
+
+    .textholder {
+        padding: 60px 70px;
+        background: linear-gradient(180deg, #171717 44.27%, rgba(0, 0, 0, 0) 100%);
+    }
+}
+
+.howwedo {
+    padding: 100px 0;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 100px;
+    }
+}
+
+.list__wrapper {
+    padding: 60px 70px;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        position: relative;
+        padding: 0 0 20px 30px;
+
+        &:before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 100%;
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
     }
 }
