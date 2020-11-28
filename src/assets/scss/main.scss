@@ -130,12 +130,28 @@ textarea {
     }
 }
 
+.align--bottom {
+    align-items: flex-end;
+}
+
+.item--center {
+    justify-content: center;
+}
+
 body {
   margin: 0;
   font: 300 20px/1.5 'Klavika', Arial, Helvetica, sans-serif;
   background: $bodybg;
   color: #fff;
   min-width: 360px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &.nav-active {
+    @media only screen and (max-width: 768px) {
+        overflow: hidden;
+    }
+  }
 }
 
 img {
@@ -146,16 +162,26 @@ img {
 
 a {
     color: #F16122;
+    transition: color 0.3s;
 }
 
 h1,h2,h3,h4,h5,h6 {
+    font-weight: 500;
     margin: 0 0 25px;
     line-height: 1.2;
     color: #fff;
 }
 
 h2 {
-    font-size: 56px;
+    font-size: 40px;
+
+    @include breakpoint('small') {
+        font-size: 48px;
+    }
+    
+    @include breakpoint('medium') {
+        font-size: 56px;
+    }
 }
 
 h3 {
@@ -166,7 +192,21 @@ p {
     margin: 0 0 20px;
 }
 
-.button__opener {
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 27px;
+    height: 27px;
+    fill: currentColor;
+}
+
+.hidden-desktop {
+    @include breakpoint('small') {
+        display: none !important;
+    }
+}
+
+.menu__opener {
     display: block;
     width: 32px;
     height: 26px;
@@ -174,6 +214,7 @@ p {
     background: transparent;
     border: none;
     outline: none !important;
+    z-index: 5;
 
     @include breakpoint('small') {
         display: none;
@@ -189,6 +230,7 @@ p {
         height: 2px;
         margin-top: -1px;
         background: #fff;
+        transition: all 0.3s;
     }
 
     &:before,
@@ -202,6 +244,23 @@ p {
     &:before {
         top: auto;
         bottom: 0;
+    }
+
+    .nav-active & {
+        span {
+            opacity: 0;
+        }
+
+        &:before,
+        &:after {
+            top: 50%;
+            bottom: auto;
+            transform: rotate(45deg);
+        }
+
+        &:before {
+            transform: rotate(-45deg);
+        }
     }
 }
 
@@ -257,43 +316,81 @@ p {
 .mainnav {
     list-style: none;
     margin: 0;
-    padding: 0;
-    font-weight: 500;
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
-    display: none;
+    top: 0;
+    bottom: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 25px;
+    padding: 80px 0;
+    background-color: #000;
+    background-image: url('../images/wave-pattern.png');
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%);
+    transition: opacity 0.3s ease-out 0.1s, visibility 0.3s ease-out 0.1s, transform 0.2s;
 
     @include breakpoint('small') {
         display: block;
         position: static;
+        background: none;
+        font-weight: 500;
+        font-size: 20px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        padding: 0;
+    }
+
+    .nav-active & {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
     }
 
     li {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 48px;
+        display: block;
+        text-align: center;
+        width: 100%;
+        margin: 0 0 10px;
+
+        @include breakpoint('small') {
+            display: inline-block;
+            vertical-align: middle;
+            width: auto;
+            margin: 0 0 0 30px;
+        }
+
+        @include breakpoint('medium') {
+            margin: 0 0 0 48px;
+        }
 
         &:last-child {
-            a {
-                padding: 4px 38px;
-                border-radius: 6px;
-                position: relative;
-                z-index: 2;
-                color: #fff;
-                text-decoration: none;
-                background: linear-gradient(to right, #F16122, #FEBD33);
-
-                &:before {
-                    content: '';
+            @include breakpoint('small') {
+                a {
+                    padding: 4px 38px;
                     border-radius: 6px;
-                    position: absolute;
-                    left: 2px;
-                    right: 2px;
-                    bottom: 2px;
-                    top: 2px;
-                    background: $bodybg;
-                    z-index: -1;
+                    position: relative;
+                    z-index: 2;
+                    color: #fff;
+                    text-decoration: none;
+                    background: linear-gradient(to right, #F16122, #FEBD33);
+
+                    &:before {
+                        content: '';
+                        border-radius: 6px;
+                        position: absolute;
+                        left: 2px;
+                        right: 2px;
+                        bottom: 2px;
+                        top: 2px;
+                        background: $bodybg;
+                        z-index: -1;
+                    }
                 }
             }
         }
@@ -304,6 +401,20 @@ p {
         text-decoration: none;
         padding: 4px 10px;
         color: rgba(255,255,255,0.6);
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    .active {
+        a {
+            color: #fff;
+
+            @include breakpoint('small') {
+                border-bottom: 2px solid #fff;
+            }
+        }
     }
 }
 
@@ -338,12 +449,18 @@ p {
 }
 
 .banner {
+    position: relative;
+
     h2,
     h1 {
         font-size: 45px;
         margin-bottom: 40px;
 
         @include breakpoint('small') {
+            font-size: 58px;
+        }
+
+        @include breakpoint('medium') {
             font-size: 78px;
         }
     }
@@ -354,12 +471,15 @@ p {
 }
 
 .banner__slider {
+    &.owl-carousel {
+        position: static;
+    }
     .bg__image {
         left: 50%;
     }
 
     .slide {
-        padding: 145px 0 312px;
+        padding: 135px 0 202px;
         overflow: hidden;
         position: relative;
 
@@ -386,6 +506,14 @@ p {
     }
 }
 
+.arrow__wrapper {
+    display: none;
+    
+    @include breakpoint('medium') {
+        display: block;
+    }
+}
+
 .arrow__holder {
     height: 100px;
     width: 20px;
@@ -402,7 +530,7 @@ p {
         background: linear-gradient(to bottom, #000, #F16122);
     }
 
-    .icon {
+    .arrow-icon {
         position: absolute;
         vertical-align: top;
         left: 0;
@@ -419,13 +547,14 @@ p {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 95px;
+    bottom: 10px;
 
     button {
         display: inline-block;
         vertical-align: top;
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
+        padding: 0;
         border-radius: 100%;
         background: #F16122;
         opacity: 0.5;
@@ -436,6 +565,11 @@ p {
         transition: opacity 0.3s;
         outline: none !important;
         border: none !important;
+
+        @include breakpoint('small') {
+            width: 15px;
+            height: 15px;
+        }
 
         &:hover {
             opacity: 1;
@@ -464,17 +598,36 @@ p {
 .descriptionboxes {
     padding: 40px 0;
 
+    @include breakpoint('small') {
+        padding: 80px 0 40px;
+    }
+
     h2 {
         text-align: center;
-        margin-bottom: 119px;
+        
+        @include breakpoint('small') {
+            margin-bottom: 70px;
+        }
+
+        @include breakpoint('medium') {
+            margin-bottom: 119px;
+        }
     }
 }
 
 .articlebox {
     text-align: center;
-    padding: 65px 25px;
+    padding: 40px 20px;
     color: rgba(255,255,255,0.7);
     background: linear-gradient(180deg, #171717 0%, rgba(23, 23, 23, 0) 100%);
+
+    @include breakpoint('medium') {
+        padding: 45px 10px;
+    }
+
+    @include breakpoint('large') {
+        padding: 65px 25px;
+    }
 
     .image {
         margin-bottom: 33px;
@@ -488,8 +641,12 @@ p {
 }
 
 .contentbox__wrappper {
-    padding: 120px 0;
+    padding: 70px 0;
     background-image: url('../images/wave-pattern.png'), radial-gradient(33.33% 46.81% at 44.95% 44.6%, rgba(0, 0, 0, 0.8) 16.44%, #020202 100%);
+    
+    @include breakpoint('small') {
+        padding: 120px 0;
+    }
 }
 
 .contentbox__text {
@@ -502,54 +659,118 @@ p {
 }
 
 .missionblock {
-    padding: 70px 0;
+    padding: 60px 0;
+
+    @include breakpoint('medium') {
+        padding: 100px 0;
+    }
 
     h2 {
         text-align: center;
-        margin-bottom: 132px;
+        margin-bottom: 40px;
+
+        @include breakpoint('small') {
+            margin-bottom: 60px;
+        }
+
+        @include breakpoint('medium') {
+            margin-bottom: 100px;
+        }
     }
 
     .text {
         font-size: 28px;
         line-height: 1.2;
-        font-weight: 700;
     }
 }
 
 .textbox {
     text-align: center;
-    padding: 0 20px;
+    padding: 0 40px 40px;
+
+    @include breakpoint('medium') {
+        padding: 0;
+    }
 
     .image {
-        margin-bottom: 37px;
-        height: 70px;
+        margin-bottom: 20px;
+
+        @include breakpoint('small') {
+            margin-bottom: 37px;
+            height: 70px;
+        }
     }
 }
 
 .ourclients {
-    padding: 190px 0 57px;
     text-align: center;
+    padding: 40px 0;
+
+    @include breakpoint('small') {
+        padding: 50px 0 37px;
+    }
+
+    @include breakpoint('medium') {
+        padding: 100px 0 57px;
+    }
 
     h2 {
-        margin-bottom: 126px;
+        margin-bottom: 40px;
+
+        @include breakpoint('small') {
+            margin-bottom: 60px;
+        }
+
+        @include breakpoint('medium') {
+            margin-bottom: 126px;
+        }
     }
 }
 
 .logo__list {
     list-style: none;
-    margin: 0 -60px 25px;
     padding: 0;
+    text-align: center;
+    margin: 0;
+
+    @include breakpoint('small') {
+        margin: 0 -60px 38px;
+    }
 
     li {
         display: inline-block;
         vertical-align: middle;
-        margin: 0 60px 20px;
+        width: 47%;
+        padding: 0 15px 35px;
+
+        @include breakpoint('small') {
+            width: 30%;
+        }
+
+
+        @include breakpoint('medium') {
+            padding: 0;
+            margin: 0 60px 20px;
+            width: auto;
+        }
+    }
+
+    img {
+        max-width: 80%;
+
+        @include breakpoint('small') {
+            max-width: 100%;
+        }
     }
 }
 
 .button__wrapper {
-    padding: 60px 0;
+    padding: 30px 0;
     text-align: center;
+
+    @include breakpoint('medium') {
+        padding: 60px 0;
+    }
 }
 
 .contactblock {
@@ -558,13 +779,21 @@ p {
     background: #fff;
 
     h2 {
-        margin-bottom: 86px;
+        margin-bottom: 30px;
+        
+        @include breakpoint('medium') {
+            margin-bottom: 86px;
+        }
     }
 }
 
 .contactblock__wrapper {
-    padding: 120px 0;
+    padding: 50px 0;
     background-image: url('../images/wave-pattern.png'), radial-gradient(33.33% 46.81% at 44.95% 44.6%, rgba(0, 0, 0, 0.8) 16.44%, #020202 100%);
+
+    @include breakpoint('medium') {
+        padding: 100px 0;
+    }
 }
 
 .form__wrapper {
@@ -575,7 +804,13 @@ p {
 
 .form-title {
     display: block;
-    margin-bottom: 22px;
+    margin-bottom: 10px;
+    font-size: 18px;
+
+    @include breakpoint('small') {
+        font-size: 20px;
+        margin-bottom: 22px;
+    }
 }
 
 
@@ -583,7 +818,11 @@ p {
     margin-bottom: 15px;
 }
 
-.form__control {
+.form__control,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
     width: 100%;
     background: transparent;
     border-width: 0 0 1px;
@@ -593,6 +832,7 @@ p {
     height: 40px;
     font-weight: 300;
     color: #fff;
+    transition: border 0.3s;
 
     &:focus {
         outline: none !important;
@@ -600,7 +840,8 @@ p {
     }
 }
 
-textarea.form__control {
+textarea.form__control,
+textarea {
     height: 80px;
 }
 
@@ -609,7 +850,11 @@ textarea.form__control {
 }
 
 .footer {
-    padding: 40px 0 80px;
+    padding: 40px 0;
+
+    @include breakpoint('medium') {
+        padding: 100px 0 80px;
+    }
 }
 
 .footer__text {
@@ -626,34 +871,67 @@ textarea.form__control {
 }
 
 .footer__column {
-    float: left;
-    width: 50%;
+    @include breakpoint('small') {
+        float: left;
+        width: 50%;
+    }
 
     & + .footer__column {
-        padding-left: 20px;
-    }
-}
-
-.footer__logo {
-    width: 180px;
-}
-
-.footer__menu {
-    float: right;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    column-count: 2;
-    column-gap: 20px;
-    text-align: center;
-
-    li {
-        padding: 0 40px 8px;
+        @include breakpoint('small') {
+            padding-left: 20px;
+        }
     }
 
     a {
         color: rgba(255,255,255,0.5);
         text-decoration: none;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+.footer__logo {
+    width: 95px;
+
+    @include breakpoint('medium') {
+        width: 180px;
+    }
+}
+
+.footer__menu {
+    list-style: none;
+    margin: 0;
+    column-count: 2;
+    column-gap: 20px;
+    padding: 40px 0 0;
+
+    @include breakpoint('small') {
+        float: right;
+        padding: 0;
+        text-align: center;
+    }
+
+    li {
+        padding: 0 0 8px;
+
+        @include breakpoint('small') {
+            padding: 0 40px 8px;
+        }
+        
+        @include breakpoint('medium') {
+            padding-bottom: 15px;
+        }
+    }
+
+    a {
+        color: rgba(255,255,255,0.5);
+        text-decoration: none;
+
+        &:hover {
+            color: #fff;
+        }
     }
 }
 
@@ -667,11 +945,28 @@ textarea.form__control {
         vertical-align: middle;
         margin-right: 10px;
     }
+
+    a {
+        display: block;
+        color: #fff;
+
+        &:hover {
+            color: #F16122;
+        }
+    }
 }
 
 .inner__banner {
     position: relative;
-    padding: 250px 0 150px;
+    padding: 160px 0 50px;
+
+    @include breakpoint('small') {
+        padding: 240px 0 100px;
+    }
+
+    @include breakpoint('medium') {
+        padding: 300px 0 180px;
+    }
 
     &:before {
         content: '';
@@ -691,6 +986,19 @@ textarea.form__control {
     }
 }
 
+.banner__desc {
+    .title {
+        display: block;
+        font-size: 24px;
+    }
+
+    .text {
+        font-size: 18px;
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
 .serviceboxes {
     .column {
         background: linear-gradient(129.86deg, #171717 57.41%, rgba(2, 2, 2, 0) 97.63%);
@@ -698,29 +1006,73 @@ textarea.form__control {
 }
 
 .service__textbox {
-    padding: 2vw 3vw;
+    padding: 30px 25px;
+
+    @include breakpoint('small') {
+        padding: 45px 30px;
+    }
+
+    @include breakpoint('medium') {
+        padding: 2.5vw 3vw 2vw;
+    }
 }
 
 .contentcolumns {
-    padding: 100px 0;
+    padding: 50px 0;
+
+    @include breakpoint('medium') {
+        padding: 120px 0 50px;
+    }
 
     .textholder {
-        padding: 60px 70px;
         background: linear-gradient(180deg, #171717 44.27%, rgba(0, 0, 0, 0) 100%);
+        padding: 30px 20px;
+
+        @include breakpoint('small') {
+            padding: 40px 30px;
+        }
+
+        @include breakpoint('medium') {
+            padding: 60px 70px;
+        }
     }
 }
 
 .howwedo {
-    padding: 100px 0;
+    padding: 40px 0 20px;
+
+    @include breakpoint('small') {
+        padding: 40px 0;
+    }
+
+    @include breakpoint('medium') {
+        padding: 80px 0;
+    }
 
     h2 {
         text-align: center;
-        margin-bottom: 100px;
+        margin-bottom: 30px;
+
+        @include breakpoint('small') {
+            margin-bottom: 45px;
+        }
+
+        @include breakpoint('medium') {
+            margin-bottom: 70px;
+        }
     }
 }
 
 .list__wrapper {
-    padding: 60px 70px;
+    padding: 30px 0;
+
+    @include breakpoint('small') {
+        padding: 10px 15px;
+    }
+
+    @include breakpoint('medium') {
+        padding: 60px 70px;
+    }
 }
 
 .list {
@@ -742,5 +1094,238 @@ textarea.form__control {
             left: 0;
             top: 10px;
         }
+    }
+}
+
+.value {
+    position: relative;
+    height: 200px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    @include breakpoint('small') {
+        height: 300px;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba(#F16122, 0.6);
+    }
+
+    .text {
+        display: block;
+        font-size: 20px;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 10px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+
+        @include breakpoint('small') {
+            font-size: 25px;
+        }
+    }
+
+}
+
+.aboutkzn {
+    padding: 30px 0;
+
+    @include breakpoint('medium') {
+        padding: 30px 0 80px;
+    }
+
+    h2 {
+        text-align: center;
+
+        @include breakpoint('small') {
+            margin-bottom: 80px;
+        }
+    }
+}
+
+.aboutbox {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    text-align: center;
+    padding: 20px 20px 30px;
+    margin-bottom: 25px;
+
+    @include breakpoint('small') {
+        margin: 0 20px 40px;
+        padding: 50px 30px 80px;
+    }
+
+    @include breakpoint('medium') {
+        margin: 0 0 40px;
+    }
+
+    @include breakpoint('large') {
+        margin: 0 20px 40px;
+    }
+
+    .title {
+        display: block;
+        font-size: 20px;
+
+        @include breakpoint('small') {
+            font-size: 25px;
+        }
+    }
+
+    .icon-wrap {
+        height: 65px;
+        margin-bottom: 20px;
+
+        @include breakpoint('small') {
+            height: 95px;
+            margin-bottom: 40px;
+        }
+    }
+
+    img {
+        @media only screen and (max-width: 767px) {
+            max-height: 100%;
+            width: auto;
+        }
+    }
+}
+
+.valuesblock {
+    padding: 40px 0;
+}
+
+.general__heading {
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 40px;
+
+    @include breakpoint('small') {
+        margin: 0 auto 100px;
+    }
+
+    h2 {
+        margin-bottom: 30px;
+
+        @include breakpoint('small') {
+            margin-bottom: 60px;
+        }
+    }
+
+    p {
+        margin-bottom: 50px;
+    }
+
+    .big {
+        font-size: 22px;
+    }
+}
+
+.certificationblock {
+    padding: 20px 0;
+
+    @include breakpoint('small') {
+        padding: 60px 0;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+
+        @include breakpoint('small') {
+            margin-bottom: 70px;
+        }
+    }
+}
+
+.asidelogo {
+    width: 120px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 30px 30px 0;
+
+    @include breakpoint('small') {
+        width: 210px;
+        display: block;
+        margin-bottom: 120px;
+    }
+}
+
+.text-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint('medium') {
+        font-size: 22px;
+    }
+
+    li {
+        margin-bottom: 20px;
+
+        @include breakpoint('medium') {
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    .title {
+        display: block;
+
+        @include breakpoint('medium') {
+            width: 80%;
+        }
+    }
+
+    .count {
+        display: block;
+        
+        @include breakpoint('medium') {
+            width: 20%;
+        }
+    }
+}
+
+.second-row {
+    padding-top: 40px;
+
+    @include breakpoint('small') {
+        padding-top: 90px;
+    }
+}
+
+
+.careersblock {
+    background-image: url('../images/wave-pattern.png');
+    padding: 40px 0;
+
+    @include breakpoint('small') {
+        padding: 80px 0;
+    }
+
+    .textwrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 25px;
+
+        @include breakpoint('small') {
+            margin-bottom: 60px;
+        }
+    }
+
+    .btn-wrapper {
+        padding-top: 50px;
     }
 }

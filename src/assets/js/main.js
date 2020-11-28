@@ -14,7 +14,9 @@ $(document).ready(function() {
     $('.owl-carousel').owlCarousel({
         items: 1,
         dots: true,
-        nav: false
+        nav: false,
+        autoplay:true,
+        autoplayTimeout: 6000
     });
 
     $('.bg__image').each(function() {
@@ -22,4 +24,9 @@ $(document).ready(function() {
       var image = $el.find("img").attr("src");
       $el.css("background-image", "url(" + image + ")");
     });
+
+    $('.menu__opener').click(function(e) {
+      e.preventDefault();
+      $('body').toggleClass('nav-active');
+    })
 })
