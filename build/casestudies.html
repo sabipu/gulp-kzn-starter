@@ -2,76 +2,356 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>KZN Group</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
-<body class="headerstyle2">
+<body>
     <div id="wrapper">
         <header class="header">
-            <div class="container container--fluid">
-                <div class="logo">
-                    <a href="/">
-                        <img src="assets/images/logo.svg" alt="KZN Group">
-                    </a>
-                </div>
-                <nav class="navigation">
-                    <button class="button__opener"><span></span></button>
-                    <ul class="mainnav">
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="work.html">Work</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
+          <div class="container container--fluid">
+              <div class="logo">
+                  <a href="/">
+                      <img src="assets/images/logo.svg" alt="KZN Group">
+                  </a>
+              </div>
+              <nav class="navigation">
+                  <button class="menu__opener"><span></span></button>
+                  <ul class="mainnav">
+                      <li><a href="services.html">Services</a></li>
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="work.html">Work</a></li>
+                      <li class="hidden-desktop"><a href="casestudies.html">Case studies</a></li>
+                      <li class="hidden-desktop"><a href="news.html">News</a></li>
+                      <li class="hidden-desktop"><a href="insights.html">Insights</a></li>
+                      <li><a href="contact.html">Contact</a></li>
+                  </ul>
+              </nav>
+          </div>
         </header>
-        <div class="casestudiesblock">
+        <div class="general__content casestudies__wrapper">
           <div class="container container--small">
-            <h2>Case studies.</h2>
-            <div class="casestudies__wrapper">
-              <div class="casestudy">
+            <h1>Case studies.</h1>
+            <ul class="findingslist">
+              <li>
                 <h3>CloudFormation: Energy Management Dashboard</h3>
-                <ul class="findingslist">
-                  <li>
+                <div class="box">
                     <div class="ico-wrap">
-                      svg
+                        <img src="assets/images/challenge.svg" alt="Challenge">
                     </div>
                     <div class="text-wrap">
-                      <span class="title">The challenge</span>
-                      <p>The utility wanted to consolidate corporate data held in various sources into a single managed data lake, which could be used to produce actionable insights. The data lake had to comply with the utility’s governance and IT architecture requirements.</p>
+                        <div class="box">
+                            <span class="title">The challenge</span>
+                            <p>The utility wanted to be able to efficiently manage electricity costs by visualising real-time energy costs, energy constraints, weather conditions (which is a driver of spot energy prices) and power consumption across their plant equipment. This visualisation was to be through a dashboard.</p>
+                            <p>Due to the criticality of this application, the utility needed a highly reliable solution.</p>
+                        </div>
                     </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/solution.svg" alt="Solution">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">KZN’s solution</span>
+                            <p>KZN proposed a highly reliable, sverless AWS dashboard solution which had automatic failover between managed databases in multiple availability zones. This also included a CI/CD pipeline to allow easy migration of software from development to test to production enviroments.</p>
+                            <p>CloudFormation was used to set up entire DevOps environment and the dashboard infrastructure.</p>
+                            <p>CloudFormation was used to set up the following in the DevOps account:</p>
+                            <ul>
+                                <li>- CodeCommit repositories to store workload account infrastructure in application code</li>
+                                <li>- CodePipelines to build, test and deploy workload infrastructure and application</li>
+                                <li>- Elastic Container Repository to contain dashboard application</li>
+                                <li>- CI/CD pipelines to deploy all infrastructure (see below)</li>
+                            </ul>
+                            <p>CloudFormation had also been used to set up the following infrastructure:</p>
+                            <ul>
+                                <li>- Relational Database Service (RDS) instance in multi-AZ configuration and encrypted at rest with KMS</li>
+                                <li>- Fargate service to provide high availability of Dashboard application</li>
+                                <li>- Fargate task to run Dashboard application in VPC</li>
+                                <li>- Application Load Balancer to provide a single point of contact for end-users and terminate HTTPS in-flight encryption</li>
+                                <li>- Kinesis Data Streams and Firehoses for data sources</li>                                
+                            </ul>
+                            <p>As a benefit of using CloudFormation, the utility can easily standup new enviroments and store the infrastructure together with the application code.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/outcome.svg" alt="Outcome">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">Outcomes</span>
+                            <p>The new Energy Management Dashboard is now hosted on a highly reliable, scalable managed cloud platform. this takes advantage of serverless technologies to remove server management overheads.</p>
+                            <p>CloudFormation means that an identical, version-controlled DevOps account and infrastructure can be stood up at short notice for testing. This also means that manual configuration work is minimised, and the exact infrastructure specification can be stored with the application code. CloudFormation leverages serverless technologies by scripting the entire deployment process.</p>
+                            <p>As a benifit of using CloudFormation, the utility can easily standup new environments for development and testing.</p>
+                        </div>
+                    </div>
+                </div>
+              </li>
+              <li>
+                <h3>CloudFormation: Data lake</h3>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/challenge.svg" alt="Challenge">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">The challenge</span>
+                            <p>The utility wanted to consolidate corporate data held in various sources into a single managed data lake, which could be used to produce actionable insights. The data lake had to comply with the utility’s governance and IT architecture requirements.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/solution.svg" alt="Solution">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">KZN’s solution</span>
+                            <p>KZN was engaged to help build an AWS based data lake. This connects to real-time data streams and automatically loads data into S3 buckets.</p>
+                            <p>CloudFormation was used to deploy the AWS infrastructure needed for the data lake. This allows the infrastructure of the data lake to be simply stored as code.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/outcome.svg" alt="Outcome">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">Outcomes</span>
+                            <p>With the use of CloudFormation, it is straight forward to deploy development and test environments. The full configuration of the data lake is stored as code, making future changes straightforward. There is a single source of truth for the entire environment. Resources are always deployed into the environment consistently, in the same order.</p>
+                        </div>
+                    </div>
+                </div>
+              </li>
+              <li>
+                <h3>CloudFormation: Data lake with analytics</h3>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/challenge.svg" alt="Challenge">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">The challenge</span>
+                            <p>Engineers for a major Western Australian chemical manufacturer needed a cloud-hosted data lake for analytics platform to improve the efficiency, reliability and safety in their manufacturing plants.</p>
+                            <p>This project was a focused solution using a single data source (once historical data was migrated from legacy systems). This supported an analytics campaign on Ammonium Nitrate (AN). Part of the requirements was to support both traditional data analytics and machine learning.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/solution.svg" alt="Solution">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">KZN’s solution</span>
+                            <p>KZN used a “born in the cloud” solution based on serverless technologies. This provides reliability and minimal maintenance. S3 was used to store incoming data, which can then be used by Athena for SQL
+                            queries, or by SageMaker for machine learning.</p>
+                            <p>CloudFormation was used to build all the environments for the application and the associated DevOps, allowing “Infrastructure as Code” (IaC). This allows a very systematic deployment process and for the
+                            configuration and application code to be stored together.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/outcome.svg" alt="Outcome">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">Outcomes</span>
+                            <p>KZN delivered a data lake that provides the required data for analysis. The data lake supports both business intelligence and data analytics capabilities with SQL and machine learning.</p>
+                            <p>All the infrastructure was built from a CloudFormation template.</p>
+                        </div>
+                    </div>
+                </div>
+              </li>
+              <li>
+                <h3>Serverless architecture: IoT</h3>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/challenge.svg" alt="Challenge">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">The challenge</span>
+                            <p>The client is a multi-national company with over 2 billion devices sold globally. The company’s main objective is to elaborate solutions for the growing problem of physically managing the deployment of portable devices, such as laptops, smartphones and tablets.</p>
+                            <p>The challenge for the KZN Group was to create a highly available, resilient, cost-effective and scalable cloud solution to support the management of a high volume of IoT devices using a serverless architecture.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/solution.svg" alt="Solution">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">KZN’s solution</span>
+                            <p>The KZN’s solution consists of a public backend API built using Lambda and API Gateway secured with Amazon Cognito and DynamoDB as the persistence data layer.</p>
+                            <p>An Edge-optimised single page application (developed in Vue.js) deployed to CloudFront is connected to the API Gateway to allow administrators to manage the fleet of devices and the lockers.</p>
+                            <p>Finally, AWS Lambda functions respond to event notifications.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/outcome.svg" alt="Outcome">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">Outcomes</span>
+                            <p>KZN delivered a scalable, resilient solution that meets the challenge of management of a large number of IoT devices, whilst benefitting from a serverless architecture.</p>
+                        </div>
+                    </div>
+                </div>
+              </li>
+              <li>
+                <h3>AWS hosting: Not for profit organisation</h3>
+                <div class="box">
+                    <div class="ico-wrap">&nbsp;</div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">About ILCWA</span>
+                            <p>The Independent Living Centre WA (ILCWA) is national not-for-profit community support organisation providing information, advice, assessment, training, funding and equipment hire services that enable
+                            Western Australians of all ages and disabilities to live more independent and fulfilling lives. Service areas include community allied health and home modification services, carer support and respite, assistive technology and equipment, occupational therapy driver assessment, Home and Community Care regional assessment, and grants and equipment funding.</p>
+                            <p>In collaboration with Independent Living Centres across Australia, ILCWA owns and operates the National Equipment Database (NED) where the public can search tens of thousands of assistive technology and equipment products from scores of suppliers to help people remain independent and improve their quality of life.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                  <div class="ico-wrap">
+                      <img src="assets/images/challenge.svg" alt="Challenge">
+                  </div>
+                  <div class="text-wrap">
+                      <div class="box">
+                          <span class="title">The challenge</span>
+                          <p>The ongoing capability of ILC’s previous hosting environment to support the NED application was in jeopardy due to viability concerns with the application developer and hosting provider. The existing operational and software development processes were no longer fit for purpose, with incidents of uncontrolled releases to production causing disruption and confusion among the user base. Inadequate development and testing environments meant that critical system and library upgrades could not be safely integrated into the production systems, causing the application’s libraries and dependencies to slip further and further out of date, and making the IT function slow to respond to business and end-user requirements.</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/solution.svg" alt="Solution">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">KZN’s solution</span>
+                            <p>KZN’s team of AWS Certified Professionals defined a two step strategy that included a tactical lift-and-shift followed by a technical transformation, implementing a DevOps culture, tooling and processes.</p>
+                            <span class="title">Lift and Shift</span>
+                            <p>KZN first worked with ILCWA on a lift-and-shift migration into AWS, moving quickly to re-host all ILCWA servers into the AWS EC2 service using the Import/Export tool to provide an immediate tactial resolution and ensure continued availability and viability of the critical NED application. Once the environment was stabilised, a modernisation program was undertaken to introduce advanced cloud technologies.</p>
+                            <span class="title">Technical Transformation</span>
+                            <p>KZN re-architected, built, deployed and tested the NED application stack onto AWS. The Ruby on Rails application code and infrastructure-as-code templates are managed together in the GitHub hosted version control system, which is the entry point into a continuous integration and continuous deployment (CI/CD) pipeline leveraging a number of AWS services including CodePipeline, CodeBuild, and CloudFormation. Once unit testing is successful, an immutable AMI image of the OS, application code and configuration is created using the Hashicorp Packer tool. The pipeline then deploys the entire application stack into an ephemeral staging environment where integration testing and optional user acceptance testing (UAT) is performed before being deployed into production. Once approved, the staging environment is automatically terminated to reduce costs. Autoscaling, Elastic Load Balancing, and RDS Multi-AZ services provide high availability at every layer of the application stack, with static and media content saved into and served directly out of S3, further reducing load on the web servers and simplifying the persistence of data. Application and system logs are streamed from the EC2 instances into the CloudWatch Logs service where rich logstream analysis alerts the operators to divergence from expected application behaviour.</p>
+                            <p>Security and access to the platform are protected using AWS accounts separated by environment (staging and production), least-privilege IAM users and groups, cross-account roles and multi-factor authentication devices. The CloudTrail service provides a tamper-resistant, centralised audit trail of all actions taken across all AWS accounts.</p>
+                            <p>Infrastructure and application performance and availability metrics are closely monitored using CloudWatch with alarms fed via SNS to the operations team’s ChatOps platform Slack. Additionally, the team are notified of infrastructure events such as autoscaling actions and CI/CD pipeline stage outcomes, helping them to understand in real-time the state of the build process and production environment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/outcome.svg" alt="Outcome">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">Outcomes</span>
+                            <p>Moving to a CI/CD model of application delivery has given ILCWA greater confidence in the development and release of new features, which are now demonstrated in a staging environment and can be released to production within minutes and at any time of day. Having the entire application stack defined using infrastructure-as-code allows individual developers to engineer and test their code in their own isolated production analogue environments, and was critical to enabling the efficient uplift of application libraries and dependencies to secure and functional versions.</p>
+                            <p>Advanced AWS managed services such as Autoscaling, Elastic Load Balancing and RDS drastically increased availability while reducing operational costs, and indeed have delivered near-100% uptime over the life of the solution to date. The offloading of static content into S3 has simplified deployment and backup procedures; when combined with autoscaling, the application can respond dynamically to changes in request volume over time.</p>
+                            <p>With staging and development environments provisioned on-demand, and automatically terminated when no longer in use it allows ILC to manage costs by only playing resources currently in use.</p>
+                            <p>Security is much improved, with immutable infrastructure and no direct access to the production environment. Only reviewed and approved code and infrastructure changes are introduced to the environment, and all access is via multi-factor authenticated and well-defined role-based access adhering to the principle of least privilege.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                  <div class="ico-wrap">&nbsp;</div>
+                  <div class="text-wrap">
+                      <div class="box">
+                          <span class="title">Testimonial</span>
+                          <p>“I have had occasion to work with a number of software companies over the last 18 years. I cannot express what a breath of fresh air working with KZN has been. Their responsiveness and customer service is second to none and their expertise and guidance in developing our thoughts into deliverable requirements has been pivotal to the resounding success of the work we have completed with them. I would have no hesitation in recommending their services to anyone. ”</p>
+                          <p class="quote__name">“- Sacha Marchant National Equipment Database Manager”</p>
+                      </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h3>Navitas - AWS DevOps Enablement</h3>
+                <div class="box">
+                    <div class="ico-wrap">&nbsp;</div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">About Navitas</span>
+                            <p>Navitas is a leading global education provider that has helped generations of learners transform their lives through education. Navitas creates life-changing opportunities to learn by delivering an extensive range of educational services to over 70,000 aspirational students across a global network of 120 colleges and campuses in 24 countries.</p>
+                            <p>Navitas develop and operate a bespoke student management system and were adopting DevOps practices and tooling with the aim to increase speed, automation, and reliability of feature releases.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                  <div class="ico-wrap">
+                      <img src="assets/images/challenge.svg" alt="Challenge">
+                  </div>
+                  <div class="text-wrap">
+                      <div class="box">
+                          <span class="title">The challenge</span>
+                          <p>Navitas were facing a large scale roll-out within a very short time frame but with the various teams that develop and operate the system already highly constrained, there was a risk that without becoming more agile, the development process may not have been able to keep up with increasing business demands resulting in missed deadlines and lost market opportunities. For example, the process for taking a new piece of software code from the developer into production involved careful planning and a number of manual steps, creating delays, uncertainty and consuming valuable developer time. The existing strategy of defining entire complex software stacks as a single monolithic template had the potential to hinder agility by preventing infrastructure components such as the web frontend and API backends from being deployed and managed as separate entities from the very large but mostly static database, significantly impacting the speed of development.</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/solution.svg" alt="Solution">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">KZN’s solution</span>
+                            <p>Initially, KZN engaged with Navitas in an advisory role to gain an understanding of the existing business, cultural, organisational and technical landscape. Based on this process, a findings report detailing the current state, where Navitas’s posture sat in relation to best practices, and a prioritised list of recommendations for remediation of any shortcomings was produced. KZN then embarked on a DevOps cultural uplift, enablement and technical remediation program to assist with aligning to AWS best practice process and tooling. KZN augmented Navitas’s DevOps team, providing guidance, delivery of the remediation items, as well as advisory services on a number of future initiatives.</p>
+                            <p>While Navitas had already adopted a continuous integration (CI) process using the on-premises Jenkins CI tool, by leveraging key enabling AWS services including CodePipeline, CodeBuild, and CodeDeploy, KZN and Navitas replaced the manual deployment process with a fully automated, end-to-end continuous integration and continuous deployment (CI/CD) process that saw code committed to the main branch of the on-premises BitBucket code repository deployed into production within minutes instead of hours and with no further planning, manual install steps or other intervention required from the devops team.</p>
+                            <p>In adopting the CI/CD model of delivery, the CodeBuild service plays a key role in generating reproducible, deployable application artefacts including all library dependencies, executing quality and test processes, and installing and configuring infrastructure instrumentation and monitoring components. Within a CodeBuild project, the Hashicorp Packer tool generates reproducible AMIs and docker images for application and test environments including the CloudWatch, CloudWatch Logs and CodeDeploy agents. These images are then launched into deployment groups using the AutoScaling capability as the targets for software deployment using the CodeDeploy service.</p>
+                            <p>To accelerate the development process and facilitate on-demand dev/test environment provisioning, KZN refactored the existing CloudFormation template into discrete infrastructure functional components as a series of loosely coupled systems.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="ico-wrap">
+                        <img src="assets/images/outcome.svg" alt="Outcome">
+                    </div>
+                    <div class="text-wrap">
+                        <div class="box">
+                            <span class="title">Outcomes</span>
+                            <p>Moving to a full CI/CD model of delivery has given Navitas greater confidence that software changes will be released to production quickly and reliably. The increased agility of the DevOps pipeline has enhanced IT’s ability to keep up with business demands and focus on delivering value.</p>
+                            <p>Making the infrastructure more modular allows development and test environments to be created and destroyed orders of magnitude faster that was previously possible, while also reducing costs. Developers now spend more time delivering business value and less time roadblocked waiting for infrastructure provisioning and environment refresh tasks to complete.</p>
+                        </div>
+                    </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
         <footer class="footer">
             <div class="container container--fluid">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-7 col-md-6">
                         <div class="footer__column">
                             <div class="footer__logo">
-                                <a href="#">
+                                <a href="/">
                                     <img src="assets/images/logo.svg" alt="KZN Group">
                                 </a>
                             </div>
                             <ul class="social__networks">
-                                <li><a href="#">
-                                    <svg class="icon" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.6662 26.9898C6.38178 26.9227 0.54331 21.0522 0.593213 13.8449C0.64372 6.51592 6.59488 0.723806 14.0482 0.86179C21.1682 0.993548 26.8946 6.88689 26.7918 14.2016C26.693 21.2221 20.7269 27.0548 13.6662 26.9898ZM17.2377 8.72687C17.3738 7.9064 17.506 7.10923 17.644 6.2761C16.4964 5.97965 15.3786 5.84086 14.2421 6.02966C12.3603 6.34238 11.6669 7.07026 11.4397 8.93013C11.4196 9.09523 11.4138 9.26314 11.4132 9.42965C11.4101 10.0738 11.4119 10.7179 11.4119 11.401C10.9447 11.401 10.5441 11.3831 10.1467 11.4114C10.0209 11.4205 9.80196 11.5492 9.79895 11.6298C9.77178 12.3574 9.78305 13.0863 9.78305 13.8759C10.3048 13.8759 10.8147 13.8759 11.3962 13.8759C11.3962 16.5761 11.3962 19.2167 11.3962 21.8568C12.512 21.8568 13.5538 21.8568 14.6446 21.8568C14.6446 19.1871 14.6446 16.5588 14.6446 13.8745C15.471 13.8745 16.2487 13.8745 17.0657 13.8745C17.1482 13.0504 17.2253 12.2785 17.3096 11.4349C16.385 11.4349 15.5259 11.4349 14.6273 11.4349C14.6273 10.7882 14.6231 10.2067 14.6283 9.62527C14.6347 8.8996 14.9748 8.54771 15.7111 8.56679C16.1934 8.57945 16.6735 8.66501 17.2377 8.72687Z" fill="white"/>
+                                <li><a href="https://www.facebook.com/" target="_blank">
+                                    <svg class="icon" viewBox="0 0 27 27">
+                                        <path d="M13.6662 26.9898C6.38178 26.9227 0.54331 21.0522 0.593213 13.8449C0.64372 6.51592 6.59488 0.723806 14.0482 0.86179C21.1682 0.993548 26.8946 6.88689 26.7918 14.2016C26.693 21.2221 20.7269 27.0548 13.6662 26.9898ZM17.2377 8.72687C17.3738 7.9064 17.506 7.10923 17.644 6.2761C16.4964 5.97965 15.3786 5.84086 14.2421 6.02966C12.3603 6.34238 11.6669 7.07026 11.4397 8.93013C11.4196 9.09523 11.4138 9.26314 11.4132 9.42965C11.4101 10.0738 11.4119 10.7179 11.4119 11.401C10.9447 11.401 10.5441 11.3831 10.1467 11.4114C10.0209 11.4205 9.80196 11.5492 9.79895 11.6298C9.77178 12.3574 9.78305 13.0863 9.78305 13.8759C10.3048 13.8759 10.8147 13.8759 11.3962 13.8759C11.3962 16.5761 11.3962 19.2167 11.3962 21.8568C12.512 21.8568 13.5538 21.8568 14.6446 21.8568C14.6446 19.1871 14.6446 16.5588 14.6446 13.8745C15.471 13.8745 16.2487 13.8745 17.0657 13.8745C17.1482 13.0504 17.2253 12.2785 17.3096 11.4349C16.385 11.4349 15.5259 11.4349 14.6273 11.4349C14.6273 10.7882 14.6231 10.2067 14.6283 9.62527C14.6347 8.8996 14.9748 8.54771 15.7111 8.56679C16.1934 8.57945 16.6735 8.66501 17.2377 8.72687Z" />
                                         </svg>
                                 </a></li>
-                                <li><a href="#">
-                                    <svg class="icon" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.6929 26.9999C6.44204 26.9867 0.585855 21.1116 0.601349 13.866C0.616642 6.61366 6.5185 0.845053 13.9084 0.858912C21.0065 0.872168 26.8178 6.81371 26.7905 14.0292C26.7635 21.1739 20.8673 27.013 13.6929 26.9999ZM6.80142 18.7587C6.82838 18.7818 6.9133 18.876 7.01693 18.9398C8.48102 19.8424 10.082 20.1618 11.774 19.9555C13.3214 19.7669 14.6735 19.0533 15.9295 18.1806C18.3959 16.4668 19.5762 14.0805 19.5004 11.0852C19.4933 10.8042 19.5929 10.6771 19.8042 10.5298C20.1471 10.2912 20.4558 10.0036 20.7789 9.73688C20.7534 9.70635 20.728 9.67582 20.7025 9.64529C20.2789 9.67823 19.8551 9.71117 19.4316 9.74411C19.86 9.26729 20.3519 8.94834 20.4723 8.27248C20.0425 8.42332 19.6877 8.56331 19.3235 8.67097C18.9619 8.77802 18.6571 8.76858 18.3371 8.44642C17.8345 7.94028 17.1592 7.7571 16.4454 7.83282C14.8117 8.00596 13.8754 8.94854 13.6233 10.6479C13.58 10.939 13.5524 11.2324 13.518 11.5216C10.9699 11.4487 8.95772 10.3617 7.25739 8.43156C6.63199 10.0347 6.85092 11.3152 8.15263 12.3682C8.12446 12.4054 8.09629 12.4425 8.06812 12.4797C7.67271 12.4074 7.27731 12.3349 6.84529 12.2557C6.87124 13.7766 8.00191 14.4137 9.22112 15.1172C8.75952 15.1697 8.40697 15.2098 8.00896 15.255C8.49209 16.4637 9.53523 16.8391 10.6613 17.2575C10.192 17.5349 9.81875 17.8392 9.39115 17.9906C8.54059 18.2919 7.66024 18.5092 6.80142 18.7587Z" fill="white"/>
+                                <li><a href="https://twitter.com/kzngrouphq" target="_blank">
+                                    <svg class="icon" viewBox="0 0 27 27">
+                                        <path d="M13.6929 26.9999C6.44204 26.9867 0.585855 21.1116 0.601349 13.866C0.616642 6.61366 6.5185 0.845053 13.9084 0.858912C21.0065 0.872168 26.8178 6.81371 26.7905 14.0292C26.7635 21.1739 20.8673 27.013 13.6929 26.9999ZM6.80142 18.7587C6.82838 18.7818 6.9133 18.876 7.01693 18.9398C8.48102 19.8424 10.082 20.1618 11.774 19.9555C13.3214 19.7669 14.6735 19.0533 15.9295 18.1806C18.3959 16.4668 19.5762 14.0805 19.5004 11.0852C19.4933 10.8042 19.5929 10.6771 19.8042 10.5298C20.1471 10.2912 20.4558 10.0036 20.7789 9.73688C20.7534 9.70635 20.728 9.67582 20.7025 9.64529C20.2789 9.67823 19.8551 9.71117 19.4316 9.74411C19.86 9.26729 20.3519 8.94834 20.4723 8.27248C20.0425 8.42332 19.6877 8.56331 19.3235 8.67097C18.9619 8.77802 18.6571 8.76858 18.3371 8.44642C17.8345 7.94028 17.1592 7.7571 16.4454 7.83282C14.8117 8.00596 13.8754 8.94854 13.6233 10.6479C13.58 10.939 13.5524 11.2324 13.518 11.5216C10.9699 11.4487 8.95772 10.3617 7.25739 8.43156C6.63199 10.0347 6.85092 11.3152 8.15263 12.3682C8.12446 12.4054 8.09629 12.4425 8.06812 12.4797C7.67271 12.4074 7.27731 12.3349 6.84529 12.2557C6.87124 13.7766 8.00191 14.4137 9.22112 15.1172C8.75952 15.1697 8.40697 15.2098 8.00896 15.255C8.49209 16.4637 9.53523 16.8391 10.6613 17.2575C10.192 17.5349 9.81875 17.8392 9.39115 17.9906C8.54059 18.2919 7.66024 18.5092 6.80142 18.7587Z"/>
                                         </svg>
                                         
                                 </a></li>
-                                <li><a href="#">
-                                    <svg class="icon" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.609622 13.9077C0.614451 6.71407 6.45333 0.851462 13.6056 0.858894C20.943 0.866526 26.781 6.65984 26.7798 13.932C26.7786 21.1682 20.9015 27.0049 13.6317 26.9895C6.4322 26.974 0.604793 21.1198 0.609622 13.9077ZM12.0173 18.8767C13.0132 18.8767 13.9567 18.8767 14.9479 18.8767C14.9479 18.6584 14.9479 18.4781 14.9479 18.2977C14.9477 16.7622 14.9463 15.2269 14.9479 13.6914C14.9489 12.7317 15.6671 12.0185 16.6275 12.0175C17.5045 12.0165 18.1349 12.6972 18.1373 13.6607C18.1411 15.2128 18.1383 16.7648 18.1383 18.317C18.1383 18.4955 18.1383 18.6743 18.1383 18.8695C19.1356 18.8695 20.0727 18.8695 21.0396 18.8695C21.0396 17.3402 21.0484 15.857 21.0351 14.3737C21.0299 13.7914 21.0323 13.1997 20.9313 12.6299C20.691 11.2744 20.0399 10.1872 18.5985 9.86601C17.2046 9.55549 15.9677 9.84231 15.1304 11.1342C15.1081 11.1685 15.0598 11.1862 14.9741 11.2465C14.9534 10.802 14.9347 10.4005 14.9161 10.0036C13.9147 10.0036 12.9723 10.0036 12.0171 10.0036C12.0173 12.9772 12.0173 15.9098 12.0173 18.8767ZM7.34857 9.98471C7.34857 12.9856 7.34857 15.9279 7.34857 18.9157C8.18585 18.9157 8.98692 18.8898 9.78517 18.9257C10.245 18.9464 10.3792 18.8078 10.3752 18.3435C10.353 15.7417 10.3647 13.1397 10.3629 10.5377C10.3627 10.3599 10.3478 10.1821 10.3389 9.98491C9.32095 9.98471 8.35649 9.98471 7.34857 9.98471ZM8.80502 8.75973C9.70207 8.76535 10.4681 8.07222 10.4854 7.23909C10.5029 6.39854 9.71675 5.65298 8.81145 5.65178C7.92245 5.65057 7.17572 6.36017 7.17511 7.20655C7.17491 8.06639 7.8963 8.7539 8.80502 8.75973Z" fill="white"/>
+                                <li><a href="https://www.linkedin.com/company/kzn-group/" target="_blank">
+                                    <svg class="icon" viewBox="0 0 27 27">
+                                        <path d="M0.609622 13.9077C0.614451 6.71407 6.45333 0.851462 13.6056 0.858894C20.943 0.866526 26.781 6.65984 26.7798 13.932C26.7786 21.1682 20.9015 27.0049 13.6317 26.9895C6.4322 26.974 0.604793 21.1198 0.609622 13.9077ZM12.0173 18.8767C13.0132 18.8767 13.9567 18.8767 14.9479 18.8767C14.9479 18.6584 14.9479 18.4781 14.9479 18.2977C14.9477 16.7622 14.9463 15.2269 14.9479 13.6914C14.9489 12.7317 15.6671 12.0185 16.6275 12.0175C17.5045 12.0165 18.1349 12.6972 18.1373 13.6607C18.1411 15.2128 18.1383 16.7648 18.1383 18.317C18.1383 18.4955 18.1383 18.6743 18.1383 18.8695C19.1356 18.8695 20.0727 18.8695 21.0396 18.8695C21.0396 17.3402 21.0484 15.857 21.0351 14.3737C21.0299 13.7914 21.0323 13.1997 20.9313 12.6299C20.691 11.2744 20.0399 10.1872 18.5985 9.86601C17.2046 9.55549 15.9677 9.84231 15.1304 11.1342C15.1081 11.1685 15.0598 11.1862 14.9741 11.2465C14.9534 10.802 14.9347 10.4005 14.9161 10.0036C13.9147 10.0036 12.9723 10.0036 12.0171 10.0036C12.0173 12.9772 12.0173 15.9098 12.0173 18.8767ZM7.34857 9.98471C7.34857 12.9856 7.34857 15.9279 7.34857 18.9157C8.18585 18.9157 8.98692 18.8898 9.78517 18.9257C10.245 18.9464 10.3792 18.8078 10.3752 18.3435C10.353 15.7417 10.3647 13.1397 10.3629 10.5377C10.3627 10.3599 10.3478 10.1821 10.3389 9.98491C9.32095 9.98471 8.35649 9.98471 7.34857 9.98471ZM8.80502 8.75973C9.70207 8.76535 10.4681 8.07222 10.4854 7.23909C10.5029 6.39854 9.71675 5.65298 8.81145 5.65178C7.92245 5.65057 7.17572 6.36017 7.17511 7.20655C7.17491 8.06639 7.8963 8.7539 8.80502 8.75973Z"/>
                                         </svg>
                                         
                                 </a></li>
@@ -80,12 +360,12 @@
                         <div class="footer__column">
                             <span class="footer__title">KZN Group Pty Ptd</span>
                             <span class="footer__text">ABN 55 607 801  338</span>
-                            <span class="footer__text">1800 861 062</span>
-                            <span class="footer__text">Level 6, 12 St. George’s Terrace <br> Perth WA 6000</span>
-                            <span class="footer__text">accounts@kzn.io</span>
+                            <span class="footer__text"><a href="tel:1800861062">1800 861 062</a></span>
+                            <span class="footer__text"><a href="https://goo.gl/maps/oG7kuhGQvYiCyqoz5" target="_blank">Level 6, 12 St. George’s Terrace <br> Perth WA 6000</a></span>
+                            <span class="footer__text"><a href="mailto:&#097;&#099;&#099;&#111;&#117;&#110;&#116;&#115;&#064;&#107;&#122;&#110;&#046;&#105;&#111;">&#097;&#099;&#099;&#111;&#117;&#110;&#116;&#115;&#064;&#107;&#122;&#110;&#046;&#105;&#111;</a></span>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5 col-md-6">
                         <ul class="footer__menu">
                             <li><a href="about.html">About</a></li>
                             <li><a href="work.html">Work</a></li>
@@ -95,7 +375,7 @@
                             <li><a href="insights.html">Insights</a></li>
                             <li><a href="news.html">News</a></li>
                             <li><a href="contact.html">Contact</a></li>
-                            <li><a href="find-us.html">Find us</a></li>
+                            <li><a href="contact.html">Find us</a></li>
                             <li><a href="legal.html">Legal</a></li>
                         </ul>
                     </div>
